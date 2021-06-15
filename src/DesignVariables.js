@@ -24,6 +24,5 @@ export const Colors={
 export const returnColor=(palette)=>{
     const colors={...palette}
     var keys = Object.keys(colors);
-    console.log( colors[keys[Math.floor(Math.random()*keys.length)]])
     return colors[keys[Math.floor(Math.random()*keys.length)]];
 }
