@@ -2,10 +2,10 @@ import { BoardsConstants } from "../actions/constants.action";
 
 const initialState={
     currentBoard:{
-        boardID:'user1board1',
-        name:'My Board 1',
-        bgColor:'#87637c',
-        description:'Testing Board',
+        boardID:'',
+        name:'',
+        bgColor:'',
+        description:'',
         userID:'',
     },
     loading:false,
@@ -14,6 +14,11 @@ const initialState={
 
 const BoardsReducer=(state=initialState,action)=>{
     switch(action.type){
+        case BoardsConstants.GET_INITIAL_BOARD:
+            state={
+                ...state,
+                currentBoard:action.payload.board
+            }
         case BoardsConstants.EDIT_BOARD_FAILURE:
             state={
                 ...state,
@@ -27,6 +32,7 @@ const BoardsReducer=(state=initialState,action)=>{
                 currentBoard:action.payload.newBoard,
                 loading:false,
             }
+            localStorage.setItem('currentBoard',JSON.stringify(action.payload.newBoard))
             break;
         case BoardsConstants.EDIT_BOARD_REQUEST:
             state={

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Board from '../containers/Board'
 import BoardDetails from '../components/BoardDetails'
 import { Backdrop } from '../Designs/misc'
+import { GetInitialData } from '../store/actions/initialdata.action'
 
 /**
 * @author
@@ -11,17 +12,23 @@ import { Backdrop } from '../Designs/misc'
 **/
 
 class Orello extends Component {
+    constructor(){
+        super()
+    }
     state = {
         showBoardDetails:false,
         showBaordsBrowser:false,
         showAccountSettings:false,
         currentBoardDetail:null,
+        detailsLoaded:false,
     }
-
     boardMenuHandler = () => {
         this.setState({ showBoardDetails: false, currentBoardDetail: null })
     }
-
+    componentDidMount(){
+        this.props.onLoad()
+        this.setState({detailsLoaded:true})
+    }
     browseBoardsHandler = () => {
         console.log('Boards Browse CLicked')
     }
@@ -57,7 +64,7 @@ class Orello extends Component {
 
 
     render() {
-        return (
+        return (this.state.detailsLoaded?
             <div>
 
                 <NavBar boardMenuClick={this.openBoardDetails}
@@ -72,7 +79,7 @@ class Orello extends Component {
 
                 {this.renderBoardDetails()}
 
-            </div>
+            </div>:null
 
 
         )
@@ -88,5 +95,10 @@ const mapStateToProps = (state) => {
         lists: state.lists.lists,
     }
 }
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        onLoad:()=>dispatch(GetInitialData())
+    }
+}
 
-export default connect(mapStateToProps, null)(Orello)
+export default connect(mapStateToProps, mapDispatchToProps)(Orello)

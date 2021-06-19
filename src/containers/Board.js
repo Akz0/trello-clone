@@ -100,14 +100,11 @@ class Board extends Component {
                 todos.push(this.props.todoItems[i])
             }
         }
-        console.log(todos)
         return todos;
     }
 
     //Drag Drop Functionality
-    onDragEnd = () => {
-        //TODO: complete this funciton
-    }
+    
 
     render() {
         const listsBoard = this.props.lists.map(item => {

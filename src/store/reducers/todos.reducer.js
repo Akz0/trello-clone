@@ -2,43 +2,7 @@ import _ from 'lodash'
 import { TodoConstants } from '../actions/constants.action';
 
 const initialState = {
-    todoItems: [
-        {
-            id: 'l0sw0',
-            todo: 'Complete Maths Homework',
-            description: '',
-            status: `complete`,
-            listID: 4455146,
-        },
-        {
-            id: 'l0sw1',
-            todo: 'English Essay',
-            description: '',
-            status: `-`,
-            listID: 4455146,
-        },
-        {
-            id: 'l0sw2',
-            todo: 'Community Project',
-            description: '',
-            status: `-`,
-            listID: 4455146,
-        },
-        {
-            id: 'l0sw3',
-            todo: 'Basketball Practice',
-            description: '',
-            status: `-`,
-            listID: 4455146,
-        },
-        {
-            id: 'l0h0',
-            todo: 'Clean Room',
-            description: '',
-            status: `working`,
-            listID: 4455456,
-        },
-    ],
+    todoItems: null,
     loading: false,
     error: null
 }
@@ -53,7 +17,7 @@ const addTodoSuccess = (state, action) => {
         listID:action.payload.listID
     }
     updatedTodoItems.push(newTodo)
-
+    localStorage.setItem('todos',JSON.stringify(updatedTodoItems))
     const newState = {
         ...state,
         todoItems: updatedTodoItems,
@@ -74,16 +38,13 @@ const deleteEditTodoSuccess = (state, action, edit) => {
     }
 
     if (edit) {
-        console.log('edit', todoIndex)
-        console.table(action.payload.newTodo)
         const updatedTodo = _.cloneDeep(action.payload.newTodo)
         updatedTodo.listID=action.payload.listID
         updatedTodoItems[todoIndex] = _.cloneDeep(updatedTodo)
     } else {
         updatedTodoItems.splice(todoIndex, 1)
-        console.log('delete', todoIndex)
     }
-
+    localStorage.setItem('todos',JSON.stringify(updatedTodoItems))
     const newState = {
         ...state,
         todoItems: updatedTodoItems,
@@ -97,7 +58,11 @@ const deleteEditTodoSuccess = (state, action, edit) => {
 
 const TodosReducer = (state = initialState, action) => {
     switch (action.type) {
-
+        case TodoConstants.GET_INITIAL_TODOS:
+            state={
+                ...state,
+                todoItems:action.payload.todos
+            }
         //todo as a single component
         case TodoConstants.ADD_NEW_TODO_REQUEST:
         case TodoConstants.DELETE_TODO_REQUEST:

@@ -2,22 +2,7 @@ import { ListConstants, TodoConstants } from '../actions/constants.action'
 import _ from "lodash";
 
 const initialState = {
-    lists: [
-        {
-            name: 'School Work',
-            boardID: 'user1board1',
-            bgColor: '#ffb11a',
-            listID: 4455146,
-            description: '',
-        },
-        {
-            name: 'Home',
-            boardID: 'user1board1',
-            listID: 4455456,
-            bgColor: '#007acc',
-            description: '',
-        }
-    ],
+    lists: null,
     loading: false,
     error: null,
 }
@@ -40,7 +25,7 @@ const addListSuccess = (state, action) => {
         todoItems: []
     }
     updatedLists.push(newList)
-
+    localStorage.setItem('lists',JSON.stringify(updatedLists))
     const newState = {
         ...state,
         lists: updatedLists,
@@ -62,6 +47,7 @@ const deleteEditListSuccess = (state, action, edit) => {
     } else {
         updatedLists.splice(listIndex, 1)
     }
+    localStorage.setItem('lists',JSON.stringify(updatedLists))
 
     const newState = {
         ...state,
@@ -75,6 +61,11 @@ const deleteEditListSuccess = (state, action, edit) => {
 const ListReducer = (state = initialState, action) => {
     switch (action.type) {
         // list as whole themselves
+        case ListConstants.GET_INITIAL_LISTS:
+            state={
+                ...state,
+                lists:action.payload.lists
+            }
         case ListConstants.ADD_NEW_LIST_FAILURE:
         case ListConstants.EDIT_LIST_FAILURE:
         case ListConstants.DELETE_LIST_FAILURE:
