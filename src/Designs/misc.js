@@ -26,6 +26,13 @@ export const ConfirmDelete=styled.div`
     align-items: center;
     text-align: center;
 
+    @media only screen and (max-width: 800px) {
+        width: 80vw;
+        height: fit-content;
+        padding: 2rem 1rem;
+        font-size: 14px;
+    }
+
 `
 export const DeleteItemName=styled.span`
     color:${Colors.nonGreyScale.red}

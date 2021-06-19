@@ -8,6 +8,7 @@ import TodoItemDetails from '../components/TodoItemDetails';
 import { Backdrop } from '../Designs/misc';
 import { CreateNewList, CreateNewTodo } from '../store/actions';
 import ListDetails from '../components/ListDetails';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 
 
@@ -17,7 +18,7 @@ class Board extends Component {
         newListName: '',
         showTodoDetails: true,
         currentTodoDetail: null,
-        showListDetails: false, 
+        showListDetails: false,
         currentListDetail: null
     }
 
@@ -91,6 +92,23 @@ class Board extends Component {
         }
     }
 
+    //get Todos for Specific Lists
+    getTodoItems = (listID) => {
+        const todos = []
+        for (var i = 0; i < this.props.todoItems.length; i++) {
+            if (this.props.todoItems[i][`listID`] === listID) {
+                todos.push(this.props.todoItems[i])
+            }
+        }
+        console.log(todos)
+        return todos;
+    }
+
+    //Drag Drop Functionality
+    onDragEnd = () => {
+        //TODO: complete this funciton
+    }
+
     render() {
         const listsBoard = this.props.lists.map(item => {
             return <ListBoard
@@ -98,13 +116,13 @@ class Board extends Component {
                 key={item.listID}
                 listID={item.listID}
                 name={item.name}
-                todos={item.todoItems}
-                openListDetails={()=>this.openListDetails({
-                    boardID:item.boardID,
-                    listID:item.listID,
-                    name:item.name,
-                    description:item.description,
-                    bgColor:item.bgColor
+                todos={this.getTodoItems(item.listID)}
+                openListDetails={() => this.openListDetails({
+                    boardID: item.boardID,
+                    listID: item.listID,
+                    name: item.name,
+                    description: item.description,
+                    bgColor: item.bgColor
                 })}
                 handleNewTodoName={this.handleNewTodoName}
                 newTodoInputValue={this.state.newTodoName}
@@ -117,25 +135,27 @@ class Board extends Component {
             <div onClick={(event) => this.showAddListButtonOnClick(event)}>
 
                 <BoardContainer>
+
                     {listsBoard}
-                    <form onSubmit={(event) => this.addNewList(event)}>
-                        <AddNewListContainer>
-                            <AddNewListInput
-                                id="add-new-list-input"
-                                onClick={(event) => this.showAddListButtonOnClick(event)}
-                                onInput={(event) => this.handleNewListName(event)}
-                                type="text"
-                                placeholder={`Add New List`}
-                                value={this.state.newListName}
-                                autoComplete="off"
-                            />
-                            <SuccessButton dark id="add-new-list-button" hiddenDisplay type="submit">Add</SuccessButton>
-                        </AddNewListContainer>
-                    </form>
+
+                    <AddNewListContainer onSubmit={this.addNewList}>
+                        <AddNewListInput
+                            id="add-new-list-input"
+                            onClick={(event) => this.showAddListButtonOnClick(event)}
+                            onInput={(event) => this.handleNewListName(event)}
+                            type="text"
+                            placeholder={`Add New List`}
+                            value={this.state.newListName}
+                            autoComplete="off"
+                        />
+                        <SuccessButton dark id="add-new-list-button" hiddenDisplay type="submit">Add</SuccessButton>
+                    </AddNewListContainer>
+
 
                     {this.renderTodoDetails()}
                     {this.renderListDetails()}
                 </BoardContainer>
+
 
 
             </div>
@@ -144,7 +164,11 @@ class Board extends Component {
 }
 
 
-
+const mapStatetoProps = state => {
+    return {
+        todoItems: state.todoItems.todoItems
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddNewList: (name, boardID, bgColor) => dispatch(CreateNewList(name, boardID, bgColor)),
@@ -152,4 +176,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Board)
+export default connect(mapStatetoProps, mapDispatchToProps)(Board)

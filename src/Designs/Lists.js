@@ -13,9 +13,14 @@ export const ListContainer = styled.div`
     height: fit-content;
     max-height: 85vh;
     background: ${props => props.bgColor};
+    
     //box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     //box-shadow: 0 -20px 15px -10px rgba(0,0, 0, 0.3) inset,0 20px 15px -10px rgba(0, 0, 0, 0.3) inset,0 0 10px rgba(0, 0, 0, 0.1);
-    
+    @media only screen and (max-width: 800px) {
+        margin: 1rem 0.3rem 1rem 0.3rem;
+        max-height: auto;
+        position: relative;
+    }
 `;
 
 export const ListTitle = styled.div`
@@ -29,7 +34,7 @@ export const ListTitle = styled.div`
     align-items: center;
 `
 export const ListMenu = styled.span`
-    padding:0 1rem 0.5rem 1rem;
+    
     font-size: 18px;
     border: none;
     color: white;
@@ -39,8 +44,10 @@ export const ListMenu = styled.span`
     justify-content: center;
     align-items: center;
     opacity: 0.5;
+    transition: 0.2s all ease;
     :hover{
         opacity: 1;
+        transform: scale(1.2);
     }
 `
 
@@ -65,6 +72,11 @@ export const AddNewTodoInput = styled.input`
     :focus{
         border: none;
         outline: none;
+    }
+    @media only screen and (max-width: 800px) {
+        font-size: 12px;
+        padding: 0.7em;
+
     }
 `;
 

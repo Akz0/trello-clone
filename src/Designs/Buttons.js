@@ -18,6 +18,11 @@ export const SuccessButton = styled.button`
         opacity: 1;
         cursor:pointer;
     }
+    @media only screen and (max-width: 800px) {
+        padding: 0.7rem 0.7rem;
+        margin-right:0.5em;
+        font-size: 10px;
+    }
 `
 export const DangerButton = styled.button`
     display: flex;
@@ -34,6 +39,11 @@ export const DangerButton = styled.button`
     :hover{
         opacity: 1;
         cursor:pointer;
+    }
+    @media only screen and (max-width: 800px) {
+        padding: 0.7rem 0.7rem;
+        margin-right:0.5em;
+        font-size: 10px;
     }
 `
 
@@ -52,5 +62,9 @@ export const TopNavBarButtons = styled.button`
     :hover{
         opacity: 1;
         cursor:pointer;
+    }
+    @media only screen and (max-width: 800px) {
+        padding: 0.8rem 0.5rem;
+        font-size: 10px;
     }
 `

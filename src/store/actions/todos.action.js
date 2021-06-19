@@ -4,7 +4,7 @@ const addTodoSuccess=(name,listID)=>{
     return {
         type:TodoConstants.ADD_NEW_TODO_SUCCESS,
         payload:{
-            todoName:name,
+            name:name,
             listID:listID
         }
     }

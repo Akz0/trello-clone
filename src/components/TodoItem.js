@@ -1,20 +1,25 @@
-import React from 'react'
-import { TodoItemContainer } from '../Designs/TodoItems'
+import React, { Component } from 'react'
+import { TodoEdit, TodoItemContainer } from '../Designs/TodoItems'
+import { FiEdit } from 'react-icons/fi'
 
 
+export default class TodoItem extends Component {
 
-export default function TodoItem(props) {
-    return (
-        <TodoItemContainer onClick={()=>{
-            props.clicked({
-                todo:props.todo,
-                description:props.description,
-                status:props.status,
-                id:props.id,
-                listID:props.listID,
-            })
-        }} status={props.status}  id={props.id}>
-            {props.todo}
-        </TodoItemContainer>
-    )
+    render() {
+        return (
+
+            <TodoItemContainer status={this.props.status} id={this.props.id}>
+                {this.props.todo}
+                <TodoEdit onClick={() => {
+                    this.props.clicked({
+                        todo: this.props.todo,
+                        description: this.props.description,
+                        status: this.props.status,
+                        id: this.props.id,
+                        listID: this.props.listID,
+                    })
+                }}><FiEdit /></TodoEdit>
+            </TodoItemContainer>
+        )
+    }
 }

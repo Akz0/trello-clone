@@ -8,8 +8,18 @@ export const BoardContainer = styled.div`
     height: 90vh;
     width: 100%;
     overflow-x: scroll;
+    @media only screen and (max-width: 800px) {
+        padding: 0.5rem;
+        align-items: center;
+        height:auto;
+        flex-direction: column;
+        overflow-x: hidden;
+        width: 100%;
+        border: 1px solid;
+    }
+    
 `
-export const AddNewListContainer = styled.div`
+export const AddNewListContainer = styled.form`
     width: 350px;
     display: flex;
     padding-left: 1rem;
@@ -18,7 +28,17 @@ export const AddNewListContainer = styled.div`
     align-items: flex-start;
     height: fit-content;
     background: ${props => props.bgColor};
+
+    @media only screen and (max-width: 800px) {
+        width: 100%;
+        padding-left:0rem;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
 `
+
 export const AddNewListInput = styled.input`
     border-radius: 5px;
     font-size: 16px;
@@ -32,5 +52,11 @@ export const AddNewListInput = styled.input`
     :focus{
         border: none;
         outline: none;
+    }
+
+    @media only screen and (max-width: 800px) {
+        font-size: 12px;
+        padding: 0.7em;
+        margin:  0.5em ;
     }
 `;
