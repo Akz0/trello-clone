@@ -12,9 +12,6 @@ import { GetInitialData } from '../store/actions/initialdata.action'
 **/
 
 class Orello extends Component {
-    constructor(){
-        super()
-    }
     state = {
         showBoardDetails:false,
         showBaordsBrowser:false,

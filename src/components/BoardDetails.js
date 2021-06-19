@@ -3,10 +3,10 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import { BlockPicker } from 'react-color'
 import { connect } from 'react-redux'
-import { DangerButton, SuccessButton } from '../Designs/Buttons'
+import { SuccessButton } from '../Designs/Buttons'
 import { Colors } from '../Designs/DesignVariables'
 import { Actions, DetailsContainer, DetailsInput, DetailsLabel, DetailsWrapper } from '../Designs/Details'
-import { Backdrop, ConfirmDelete, DeleteItemName } from '../Designs/misc'
+// import { Backdrop, ConfirmDelete, DeleteItemName } from '../Designs/misc'
 import { EditBoard } from '../store/actions'
 
 /**

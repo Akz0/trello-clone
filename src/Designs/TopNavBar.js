@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Colors,returnColor } from "./DesignVariables"
+import { Colors } from "./DesignVariables"
 
 export const TopNavBar = styled.div`
     display: flex;

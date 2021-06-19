@@ -1,4 +1,4 @@
-import { ListConstants, TodoConstants } from '../actions/constants.action'
+import { ListConstants } from '../actions/constants.action'
 import _ from "lodash";
 
 const initialState = {
@@ -66,6 +66,7 @@ const ListReducer = (state = initialState, action) => {
                 ...state,
                 lists:action.payload.lists
             }
+            break;
         case ListConstants.ADD_NEW_LIST_FAILURE:
         case ListConstants.EDIT_LIST_FAILURE:
         case ListConstants.DELETE_LIST_FAILURE:
@@ -93,6 +94,7 @@ const ListReducer = (state = initialState, action) => {
         case ListConstants.DELETE_LIST_SUCCESS:
             state = deleteEditListSuccess(state, action, false)
             break;
+        default :return state
     }
     return state
 }

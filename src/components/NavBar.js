@@ -1,7 +1,7 @@
 import React from 'react'
-import { FcSettings, FcTimeline, FcWorkflow } from 'react-icons/fc'
+import { FcWorkflow } from 'react-icons/fc'
 import { TopNavBarButtons } from '../Designs/Buttons'
-import { BoardSettings, BoardTitle, ButtonTitle, SettingsContainer, TopNavBar } from '../Designs/TopNavBar'
+import { BoardSettings, BoardTitle, ButtonTitle, TopNavBar } from '../Designs/TopNavBar'
 
 /**
 * @author

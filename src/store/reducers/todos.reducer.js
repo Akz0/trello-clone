@@ -63,6 +63,7 @@ const TodosReducer = (state = initialState, action) => {
                 ...state,
                 todoItems:action.payload.todos
             }
+            break;
         //todo as a single component
         case TodoConstants.ADD_NEW_TODO_REQUEST:
         case TodoConstants.DELETE_TODO_REQUEST:

@@ -8,7 +8,6 @@ import TodoItemDetails from '../components/TodoItemDetails';
 import { Backdrop } from '../Designs/misc';
 import { CreateNewList, CreateNewTodo } from '../store/actions';
 import ListDetails from '../components/ListDetails';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 
 

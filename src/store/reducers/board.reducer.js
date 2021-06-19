@@ -19,6 +19,7 @@ const BoardsReducer=(state=initialState,action)=>{
                 ...state,
                 currentBoard:action.payload.board
             }
+            break;
         case BoardsConstants.EDIT_BOARD_FAILURE:
             state={
                 ...state,
