@@ -6,9 +6,14 @@ import { FiEdit } from 'react-icons/fi'
 export default class TodoItem extends Component {
 
     render() {
+
         return (
 
-            <TodoItemContainer status={this.props.status} id={this.props.id}>
+            <TodoItemContainer
+                status={this.props.status}
+                id={this.props.id}
+                className={'TodoCard'}
+            >
                 {this.props.todo}
                 <TodoEdit onClick={() => {
                     this.props.clicked({
@@ -20,6 +25,8 @@ export default class TodoItem extends Component {
                     })
                 }}><FiEdit /></TodoEdit>
             </TodoItemContainer>
+
+
         )
     }
 }

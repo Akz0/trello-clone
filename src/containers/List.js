@@ -28,6 +28,16 @@ class ListBoard extends Component {
         }
     }
 
+    // Drag and Drop
+    onDrop = (event) => {
+        event.preventDefault()
+        const cardID = event.dataTransfer.getItem('cardID')
+        const card = document.getElementById(cardID)
+        event.target.appendChild(card)
+    }
+    onDrag = (event) => {
+        event.preventDefault()
+    }
     render() {
         const todos = this.props.todos.map((item, index) => {
             return <TodoItem
@@ -53,7 +63,9 @@ class ListBoard extends Component {
                     <ListTitle><span>{this.props.name}</span> <ListMenu onClick={this.props.openListDetails}><RiSettingsLine /></ListMenu></ListTitle>
 
                     <TodosContainer>
-                        {todos}
+                        <div style={{ width: '100%' }}>
+                            {todos}
+                        </div>
                     </TodosContainer>
 
                     <form style={{ width: '100%' }} onSubmit={(event) => this.addTodo(event, this.props.listID)}>
@@ -70,8 +82,6 @@ class ListBoard extends Component {
                             <SuccessButton id={`add-new-todo-button${this.props.listID}`} hiddenDisplay type="submit">Add</SuccessButton>
                         </AddNewTodoContainer>
                     </form>
-
-
                 </ListContainer>
             </div>
         )

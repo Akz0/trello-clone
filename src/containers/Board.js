@@ -102,7 +102,8 @@ class Board extends Component {
         return todos;
     }
 
-    //Drag Drop Functionality
+    //Drag and Drop
+
     
 
     render() {
@@ -128,12 +129,10 @@ class Board extends Component {
             />
         })
         return (
+           
             <div onClick={(event) => this.showAddListButtonOnClick(event)}>
-
                 <BoardContainer>
-
                     {listsBoard}
-
                     <AddNewListContainer onSubmit={this.addNewList}>
                         <AddNewListInput
                             id="add-new-list-input"
@@ -146,15 +145,11 @@ class Board extends Component {
                         />
                         <SuccessButton dark id="add-new-list-button" hiddenDisplay type="submit">Add</SuccessButton>
                     </AddNewListContainer>
-
-
                     {this.renderTodoDetails()}
                     {this.renderListDetails()}
                 </BoardContainer>
-
-
-
             </div>
+            
         )
     }
 }
