@@ -6,10 +6,9 @@ import { SuccessButton } from '../Designs/Buttons';
 import { AddNewListContainer, AddNewListInput, BoardContainer } from '../Designs/Board';
 import TodoItemDetails from '../components/TodoItemDetails';
 import { Backdrop } from '../Designs/misc';
-import { CreateNewList, CreateNewTodo } from '../store/actions';
+import { CreateNewList, CreateNewTodo, TodoListChange } from '../store/actions';
 import ListDetails from '../components/ListDetails';
-
-
+import _ from 'lodash';
 
 class Board extends Component {
 
@@ -18,7 +17,12 @@ class Board extends Component {
         showTodoDetails: true,
         currentTodoDetail: null,
         showListDetails: false,
-        currentListDetail: null
+        currentListDetail: null,
+
+        dragItem: null,
+        dragged: null,
+        draggedFromListID: '',
+        draggedOnListID: '',
     }
 
     addNewList = (e) => {
@@ -93,27 +97,55 @@ class Board extends Component {
 
     //get Todos for Specific Lists
     getTodoItems = (listID) => {
-        const todos = []
+
         for (var i = 0; i < this.props.todoItems.length; i++) {
             if (this.props.todoItems[i][`listID`] === listID) {
-                todos.push(this.props.todoItems[i])
+                return _.cloneDeep(this.props.todoItems[i].items)
+
             }
         }
-        return todos;
+
     }
 
+<<<<<<< HEAD
     //Drag and Drop
 
     
+=======
+    //Drag Drop Functionality
+    //set drag Data
+    setDragFromList = (event, item) => {
+        this.setState({ draggedFromListID: item })
+    }
+    setDragOnList = (event, item) => {
+        this.setState({ draggedOnListID: item })
+    }
+    setDragItem = (event, todo) => {
+        this.setState({ dragTodo: todo })
+    }
+    ChangeTodoList = () => {
+        if (this.state.draggedFromListID === this.state.draggedOnListID) {
+           return
+        } else {
+            this.props.onMoveTodoComplete(this.state.draggedFromListID, this.state.draggedOnListID, this.state.dragTodo)
+        }
+        document.querySelectorAll('.todoCard').forEach(item => {
+            item.style.transform = 'scale(1)'
+        })
+
+    }
+>>>>>>> testing
 
     render() {
         const listsBoard = this.props.lists.map(item => {
             return <ListBoard
+
                 bgColor={item.bgColor}
                 key={item.listID}
                 listID={item.listID}
                 name={item.name}
                 todos={this.getTodoItems(item.listID)}
+
                 openListDetails={() => this.openListDetails({
                     boardID: item.boardID,
                     listID: item.listID,
@@ -121,10 +153,17 @@ class Board extends Component {
                     description: item.description,
                     bgColor: item.bgColor
                 })}
+
                 handleNewTodoName={this.handleNewTodoName}
                 newTodoInputValue={this.state.newTodoName}
                 addNewTodo={this.addNewTodo}
                 todoClicked={this.openTodoDetails}
+
+                setDragFromList={this.setDragFromList}
+                setDragOnList={this.setDragOnList}
+                setDragItem={this.setDragItem}
+
+                moveComplete={this.ChangeTodoList}
 
             />
         })
@@ -154,7 +193,6 @@ class Board extends Component {
     }
 }
 
-
 const mapStatetoProps = state => {
     return {
         todoItems: state.todoItems.todoItems
@@ -163,7 +201,8 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddNewList: (name, boardID, bgColor) => dispatch(CreateNewList(name, boardID, bgColor)),
-        onAddNewTodo: (name, listID) => dispatch(CreateNewTodo(name, listID))
+        onAddNewTodo: (name, listID) => dispatch(CreateNewTodo(name, listID)),
+        onMoveTodoComplete: (fromListID, toListID, TodoItem) => dispatch(TodoListChange(fromListID, toListID, TodoItem))
     }
 }
 
