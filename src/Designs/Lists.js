@@ -3,13 +3,13 @@ import { Colors } from "./DesignVariables";
 
 
 export const ListContainer = styled.div`
-    width: 350px;
+    width: 370px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     margin: 0 1rem 0 1rem;
-    padding: 1rem 1rem;
+    padding: 1rem 0.8rem;
     height: fit-content;
     max-height: 85vh;
     background: ${props => props.bgColor};
@@ -76,17 +76,18 @@ export const AddNewTodoInput = styled.input`
     @media only screen and (max-width: 800px) {
         font-size: 12px;
         padding: 0.7em;
-
     }
 `;
 
 export const TodosContainer = styled.div`
     width: 100%;
     display: flex;
+    padding:0 10px 0 10px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     height: fit-content;
     max-height: 60vh;
     overflow-y: auto;
+    overflow-x:hidden ;
 `

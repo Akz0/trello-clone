@@ -20,7 +20,7 @@ export const GetTodos = () => {
         }
         else {
             todos = _.cloneDeep(InitialTodoItems)
-            localStorage.setItem('todos',JSON.stringify(todos))
+            localStorage.setItem('todos', JSON.stringify(todos))
         }
         dispatch({
             type: TodoConstants.GET_INITIAL_TODOS,
@@ -68,5 +68,19 @@ export const EditTodo = (listID, todoID, TodoItem) => {
     return dispatch => {
         dispatch({ type: TodoConstants.EDIT_TODO_REQUEST })
         dispatch(editTodoSuccess(listID, todoID, TodoItem))
+    }
+}
+
+export const TodoListChange = (fromListID, toListID, TodoItem) => {
+    return dispatch => {
+        dispatch({ type: TodoConstants.DELETE_TODO_REQUEST })
+        dispatch(deleteTodoSuccess(fromListID, TodoItem.id))
+        dispatch({
+            type: TodoConstants.DRAG_MOVE_COMPLETE,
+            payload: {
+                listID: toListID,
+                todo: TodoItem
+            }
+        })
     }
 }

@@ -8,19 +8,28 @@ const initialState = {
 }
 
 const addTodoSuccess = (state, action) => {
-    const updatedTodoItems = _.cloneDeep(state.todoItems);
+    const updatedList = _.cloneDeep(state.todoItems);
+    let listIndex
+    for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i][`listID`] === action.payload.listID) {
+            listIndex = i
+            break
+        }
+    }
+    const updatedTodoItems = _.cloneDeep(updatedList[listIndex].items)
     const newTodo = {
         id: Math.random(),
         todo: action.payload.name,
         description: '',
         status: '-',
-        listID:action.payload.listID
+        listID: action.payload.listID
     }
     updatedTodoItems.push(newTodo)
-    localStorage.setItem('todos',JSON.stringify(updatedTodoItems))
+    updatedList[listIndex].items = updatedTodoItems
+    localStorage.setItem('todos', JSON.stringify(updatedList))
     const newState = {
         ...state,
-        todoItems: updatedTodoItems,
+        todoItems: updatedList,
         loading: false,
     }
 
@@ -28,9 +37,18 @@ const addTodoSuccess = (state, action) => {
 }
 
 const deleteEditTodoSuccess = (state, action, edit) => {
-    const updatedTodoItems = _.cloneDeep(state.todoItems);
+    const updatedList = _.cloneDeep(state.todoItems);
+    let listIndex
+    for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i][`listID`] === action.payload.listID) {
+            listIndex = i
+            break
+        }
+    }
+
+    const updatedTodoItems = _.cloneDeep(updatedList[listIndex].items)
     let todoIndex
-    for (var i = 0; i < updatedTodoItems.length; i++) {
+    for (let i = 0; i < updatedTodoItems.length; i++) {
         if (updatedTodoItems[i][`id`] === action.payload.id) {
             todoIndex = i
             break
@@ -39,15 +57,47 @@ const deleteEditTodoSuccess = (state, action, edit) => {
 
     if (edit) {
         const updatedTodo = _.cloneDeep(action.payload.newTodo)
-        updatedTodo.listID=action.payload.listID
+        updatedTodo.listID = action.payload.listID
         updatedTodoItems[todoIndex] = _.cloneDeep(updatedTodo)
     } else {
         updatedTodoItems.splice(todoIndex, 1)
     }
-    localStorage.setItem('todos',JSON.stringify(updatedTodoItems))
+
+    updatedList[listIndex].items = updatedTodoItems
+    localStorage.setItem('todos', JSON.stringify(updatedList))
     const newState = {
         ...state,
-        todoItems: updatedTodoItems,
+        todoItems: updatedList,
+        loading: false,
+    }
+
+    return newState
+}
+
+const dragMoveSuccess = (state, action) => {
+
+    const updatedList = _.cloneDeep(state.todoItems);
+    let listIndex
+    for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i][`listID`] === action.payload.listID) {
+            listIndex = i
+            break
+        }
+    }
+    const updatedTodoItems = _.cloneDeep(updatedList[listIndex].items)
+ 
+    const newTodo = {
+        ...action.payload.todo,
+        listID:action.payload.listID
+    }
+    
+
+    updatedTodoItems.push(newTodo)
+    updatedList[listIndex].items = updatedTodoItems
+    localStorage.setItem('todos', JSON.stringify(updatedList))
+    const newState = {
+        ...state,
+        todoItems: updatedList,
         loading: false,
     }
 
@@ -55,13 +105,15 @@ const deleteEditTodoSuccess = (state, action, edit) => {
 }
 
 
-
 const TodosReducer = (state = initialState, action) => {
     switch (action.type) {
+        case TodoConstants.DRAG_MOVE_COMPLETE:
+            state = dragMoveSuccess(state, action)
+            break;
         case TodoConstants.GET_INITIAL_TODOS:
-            state={
+            state = {
                 ...state,
-                todoItems:action.payload.todos
+                todoItems: action.payload.todos
             }
             break;
         //todo as a single component
