@@ -13,11 +13,12 @@ export const TodoItemContainer=styled.div`
     text-decoration: ${props=>props.status==='complete'?'line-through':'none'};
     display: flex;
     justify-content: space-between;
-<<<<<<< HEAD
-    align-items: center;
-=======
     align-items: center;    
->>>>>>> testing
+
+    :hover{
+        cursor: move;
+    }
+
 `;
 
 export const TodoEdit=styled.span`
