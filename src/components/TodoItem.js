@@ -3,33 +3,6 @@ import { TodoEdit, TodoItemContainer } from '../Designs/TodoItems'
 import { FiEdit } from 'react-icons/fi'
 
 
-<<<<<<< HEAD
-export default class TodoItem extends Component {
-
-    render() {
-
-        return (
-
-            <TodoItemContainer
-                status={this.props.status}
-                id={this.props.id}
-                className={'TodoCard'}
-            >
-                {this.props.todo}
-                <TodoEdit onClick={() => {
-                    this.props.clicked({
-                        todo: this.props.todo,
-                        description: this.props.description,
-                        status: this.props.status,
-                        id: this.props.id,
-                        listID: this.props.listID,
-                    })
-                }}><FiEdit /></TodoEdit>
-            </TodoItemContainer>
-
-
-        )
-=======
 const TodoItem = React.memo((props) => {
 
     const handleDragStart = (event) => {
@@ -52,7 +25,6 @@ const TodoItem = React.memo((props) => {
     }
     const handleDragLeave = (event) => {
         event.target.style.transform = 'scale(1)'
->>>>>>> testing
     }
     const handleDragOver = (event) => {
         event.preventDefault()

@@ -107,11 +107,6 @@ class Board extends Component {
 
     }
 
-<<<<<<< HEAD
-    //Drag and Drop
-
-    
-=======
     //Drag Drop Functionality
     //set drag Data
     setDragFromList = (event, item) => {
@@ -134,7 +129,6 @@ class Board extends Component {
         })
 
     }
->>>>>>> testing
 
     render() {
         const listsBoard = this.props.lists.map(item => {
