@@ -20,9 +20,8 @@ const addListSuccess = (state, action) => {
     const newList = {
         name: action.payload.listName,
         boardID: action.payload.board,
-        listID: parseInt(Date.now()),
+        listID: action.payload.id,
         bgColor: action.payload.backgroundColor,
-        todoItems: []
     }
     updatedLists.push(newList)
     localStorage.setItem('lists',JSON.stringify(updatedLists))

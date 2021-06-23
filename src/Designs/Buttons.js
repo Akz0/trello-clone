@@ -33,7 +33,7 @@ export const DangerButton = styled.button`
     font-size: 14px;
     border: none;
     color: ${Colors.white};
-    background: ${Colors.nonGreyScale.red};
+    background: ${props=>props.danger?`${Colors.nonGreyScale.red}`:`${Colors.nonGreyScale.blue}`};
     border-radius: 3px;
     opacity: 0.7;
     :hover{
