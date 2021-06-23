@@ -119,7 +119,7 @@ class ListDetails extends Component {
                     <Actions>
                         <SuccessButton dark onClick={this.props.closeDetails}>Cancel</SuccessButton>
                         <SuccessButton border onClick={this.completeEdit}>Save</SuccessButton>
-                        <DangerButton onClick={this.handleDeleteConfirmation}>Delete</DangerButton>
+                        <DangerButton danger onClick={this.handleDeleteConfirmation}>Delete</DangerButton>
                     </Actions>
 
                     <Backdrop show={this.state.showDeleteConfirmation}>
@@ -127,7 +127,7 @@ class ListDetails extends Component {
                             <DetailsLabel>Are you sure you want to delete List "<DeleteItemName>{this.state.newList.name}</DeleteItemName>"? All the Tasks Within the List will be delete.</DetailsLabel>
                             <Actions>
                                 <SuccessButton dark onClick={this.handleDeleteConfirmation}>Cancel</SuccessButton>
-                                <DangerButton onClick={this.deleteList}>Delete</DangerButton>
+                                <DangerButton danger onClick={this.deleteList}>Delete</DangerButton>
                             </Actions>
                         </ConfirmDelete>
                     </Backdrop>

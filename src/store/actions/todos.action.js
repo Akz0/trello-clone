@@ -72,11 +72,14 @@ export const EditTodo = (listID, todoID, TodoItem) => {
 }
 
 export const TodoListChange = (fromListID, toListID, TodoItem) => {
+    console.log('from ',fromListID)
+    console.log('To ',toListID)
+    console.table(TodoItem)
     return dispatch => {
         dispatch({ type: TodoConstants.DELETE_TODO_REQUEST })
         dispatch(deleteTodoSuccess(fromListID, TodoItem.id))
         dispatch({
-            type: TodoConstants.DRAG_MOVE_COMPLETE,
+            type: TodoConstants.CHANGE_TODO_LIST,
             payload: {
                 listID: toListID,
                 todo: TodoItem

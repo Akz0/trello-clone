@@ -1,13 +1,14 @@
 import _ from "lodash"
 import { InitialLists } from "../reducers/initialData"
-import { ListConstants } from "./constants.action"
+import { ListConstants, TodoConstants } from "./constants.action"
 
-const addlist = (name, boardID, bgColor) => {
+const addlist = (name, boardID, bgColor,id) => {
     return {
         type: ListConstants.ADD_NEW_LIST_SUCCESS,
         payload: {
             listName: name,
             board: boardID,
+            id:id,
             backgroundColor: bgColor,
         }
     }
@@ -52,16 +53,29 @@ export const GetLists = () => {
 }
 
 export const CreateNewList = (name, boardID, bgColor) => {
+    const id=parseInt(Date.now()).toString()
     return dispatch => {
         dispatch({ type: ListConstants.ADD_NEW_LIST_REQUEST })
-        dispatch(addlist(name, boardID, bgColor))
+        dispatch(addlist(name, boardID, bgColor,id))
+        dispatch({
+            type:TodoConstants.ADD_NEW_TODO_LIST,
+            payload:{
+                listID:id
+            }
+        })
     }
 }
 
-export const DeleteList = (boardID, lsitID) => {
+export const DeleteList = (boardID, listID) => {
     return dispatch => {
         dispatch({ type: ListConstants.DELETE_LIST_REQUEST })
-        dispatch(deleteTodoSuccess(boardID, lsitID))
+        dispatch(deleteTodoSuccess(boardID, listID))
+        dispatch({
+            type:TodoConstants.DELETE_TODO_LIST,
+            payload:{
+                listID:listID,
+            }
+        })
     }
 }
 

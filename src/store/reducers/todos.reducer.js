@@ -85,12 +85,12 @@ const dragMoveSuccess = (state, action) => {
         }
     }
     const updatedTodoItems = _.cloneDeep(updatedList[listIndex].items)
- 
+
     const newTodo = {
         ...action.payload.todo,
-        listID:action.payload.listID
+        listID: action.payload.listID
     }
-    
+
 
     updatedTodoItems.push(newTodo)
     updatedList[listIndex].items = updatedTodoItems
@@ -104,10 +104,46 @@ const dragMoveSuccess = (state, action) => {
     return newState
 }
 
+const addNewList = (state, action) => {
+    const updatedList = _.cloneDeep(state.todoItems);
+    const newList = {
+        listID: action.payload.listID,
+        items: []
+    }
+    updatedList.push(newList)
+    localStorage.setItem('todos', JSON.stringify(updatedList))
+    const newState = {
+        ...state,
+        todoItems: updatedList,
+        loading: false,
+    }
 
+    return newState
+}
+const deleteList=(state, action)=>{
+    const updatedList = _.cloneDeep(state.todoItems);
+
+    let listIndex
+    for (let i = 0; i < updatedList.length; i++) {
+        if (updatedList[i][`listID`] === action.payload.listID) {
+            listIndex = i
+            break
+        }
+    }
+    
+    updatedList.splice(listIndex,1)
+    localStorage.setItem('todos', JSON.stringify(updatedList))
+    const newState = {
+        ...state,
+        todoItems: updatedList,
+        loading: false,
+    }
+
+    return newState
+}
 const TodosReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TodoConstants.DRAG_MOVE_COMPLETE:
+        case TodoConstants.CHANGE_TODO_LIST:
             state = dragMoveSuccess(state, action)
             break;
         case TodoConstants.GET_INITIAL_TODOS:
@@ -116,6 +152,13 @@ const TodosReducer = (state = initialState, action) => {
                 todoItems: action.payload.todos
             }
             break;
+        case TodoConstants.ADD_NEW_TODO_LIST:
+            state = addNewList(state, action)
+            break;
+        case TodoConstants.DELETE_TODO_LIST:
+            state = deleteList(state, action)
+            break;
+        //todo as a single component
         //todo as a single component
         case TodoConstants.ADD_NEW_TODO_REQUEST:
         case TodoConstants.DELETE_TODO_REQUEST:
