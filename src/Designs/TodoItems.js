@@ -9,7 +9,7 @@ export const TodoItemContainer=styled.div`
     margin:  0.5em 0 0.5em 0;
     background: ${Colors.white};
     opacity: ${props=>props.status==='complete'?'0.5':'1'};
-    border:${props=>props.status==='working'?`5px solid ${Colors.darkGrey}`:'none'};
+    border:${props=>props.status==='working'?`5px solid #7f0061`:'none'};
     text-decoration: ${props=>props.status==='complete'?'line-through':'none'};
     display: flex;
     justify-content: space-between;

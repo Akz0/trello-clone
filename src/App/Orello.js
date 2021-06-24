@@ -5,6 +5,7 @@ import Board from '../containers/Board'
 import BoardDetails from '../components/BoardDetails'
 import { Backdrop } from '../Designs/misc'
 import { GetInitialData } from '../store/actions/initialdata.action'
+import { MainContainer } from '../Designs/Orello'
 
 /**
 * @author
@@ -23,6 +24,15 @@ class Orello extends Component {
         this.setState({ showBoardDetails: false, currentBoardDetail: null })
     }
     componentDidMount(){
+        if(localStorage.getItem('lists')){
+            const lists=JSON.parse(localStorage.getItem('lists'))
+            lists.forEach(item => {
+                if(item.todoItems){
+                    localStorage.clear()
+                    return
+                }
+            });
+        }
         this.props.onLoad()
         this.setState({detailsLoaded:true})
     }
@@ -59,10 +69,9 @@ class Orello extends Component {
 
 
 
-
     render() {
         return (this.state.detailsLoaded?
-            <div>
+            <MainContainer >
 
                 <NavBar boardMenuClick={this.openBoardDetails}
                     browseBoards={this.browseBoardsHandler}
@@ -76,7 +85,7 @@ class Orello extends Component {
 
                 {this.renderBoardDetails()}
 
-            </div>:null
+            </MainContainer>:null
 
 
         )
