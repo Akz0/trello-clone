@@ -66,7 +66,7 @@ export const InitialTodoItems=[
 export const InitialCurrentBoard={
     boardID:'user1board1',
     name:'My Board 1',
-    bgColor:'#87637c',
+    bgColor:'#8e5572',
     description:'Testing Board',
     userID:'',
 }

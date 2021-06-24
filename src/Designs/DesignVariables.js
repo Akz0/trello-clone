@@ -31,3 +31,7 @@ export const returnColor=(palette)=>{
     var keys = Object.keys(colors);
     return colors[keys[Math.floor(Math.random()*keys.length)]];
 }
+
+export const Fonts={
+    
+}

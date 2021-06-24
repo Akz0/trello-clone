@@ -6,7 +6,9 @@ export const TopNavBar = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 10vh;
-    background-color: ${props=>props.color};
+    background-color: rgba(0,0,0,0.05) ;
+    border-bottom: 1px solid ${props=>props.color};
+    
 `
 export const ButtonTitle = styled.span`
     margin: 0 0.4rem;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Colors } from "./DesignVariables";
 
-
 export const ListContainer = styled.div`
     width: 370px;
     display: flex;
@@ -13,9 +12,26 @@ export const ListContainer = styled.div`
     height: fit-content;
     max-height: 85vh;
     background: ${props => props.bgColor};
+    border-radius: 4px;
     
-    //box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+    //box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset,0 0 10px 1px ${props => props.bgColor} ;
     //box-shadow: 0 -20px 15px -10px rgba(0,0, 0, 0.3) inset,0 20px 15px -10px rgba(0, 0, 0, 0.3) inset,0 0 10px rgba(0, 0, 0, 0.1);
+    
+    
+    /* -webkit-box-shadow: 0px 20px 20px -20px ${props => props.bgColor};
+    -moz-box-shadow: 0px 20px 20px -20px ${props => props.bgColor}; */
+    box-shadow: 0px 20px 20px -20px rgba(25, 11, 33, 1);
+
+    &:hover {
+
+      /* -webkit-box-shadow: 0px 20px 35px -16px ${props => props.bgColor};
+      -moz-box-shadow: 0px 20px 35px -16px ${props => props.bgColor}; */
+      box-shadow: 0px 20px 35px -16px rgba(25, 11, 33, 1);      
+    }
+    
+    
+    
     @media only screen and (max-width: 800px) {
         margin: 1rem 0.3rem 1rem 0.3rem;
         max-height: auto;
