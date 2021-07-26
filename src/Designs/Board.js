@@ -7,7 +7,7 @@ export const BoardContainer = styled.div`
     padding: 1rem;
     height: 90vh;
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 	// style -1 
     /* background:
     linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
@@ -38,7 +38,8 @@ export const BoardContainer = styled.div`
     
 `
 export const AddNewListContainer = styled.form`
-    width: 350px;
+    min-width: 350px;
+    max-width: 350px;
     display: flex;
     padding-left: 1rem;
     flex-direction: column;
