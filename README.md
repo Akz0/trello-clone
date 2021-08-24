@@ -2,7 +2,7 @@
 A trello Clone 
 A simple Kanban application with customizability and drag and drop operations.
 
-### [Orello.netlify.app](orello.netlify.app)
+### [Orello.netlify.app](https://www.orello.netlify.app)
 
 ### Technologies Used
 - React Js
